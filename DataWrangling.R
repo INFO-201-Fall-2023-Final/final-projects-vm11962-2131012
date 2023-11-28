@@ -24,17 +24,18 @@ for (col in col_to_con) {
 col_to_rem <- c("Date", "Name.x", "Name.y", "Year.x", "Year.y", "Nationality.x", "Nationality.y", "Cause.of.death.x", "Cause.of.death.y")
 new_df <- new_df[, -which(names(new_df) %in% col_to_rem)]
 
-cols_with_na <- c("Name", "Year", "Nationality", "Cause.of.death")
-new_df <- new_df[complete.cases(new_df[, cols_with_na]), ]
+col_to_clean <- c("Name", "Year", "Nationality", "Cause.of.death")
+new_df[col_to_clean] <- lapply(new_df[col_to_clean], function(x) gsub("NA", "", as.character(x)))
 
 #You will then also need to create additional columns in your dataset: 
 #Must create at least one new categorical variable
-new_df$Year_descr <- cut(as.numeric(new_df$Year), breaks = c(2000, 2020), 
-                         labels = c("Before 2000", "2000-2020"), include.lowest = TRUE)
- 
+
+                               
 #Must create at least one new continuous/numerical variable
   
   
 #Must create at least one summarization data frame 
 #Note - your summarization table does not need to be exported to a csv file, 
 #you just need to have code that create this data frame. 
+
+                               

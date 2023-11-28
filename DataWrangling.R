@@ -29,6 +29,7 @@ new_df[col_to_clean] <- lapply(new_df[col_to_clean], function(x) gsub("NA", "", 
 
 #You will then also need to create additional columns in your dataset: 
 #Must create at least one new categorical variable
+new_df$Year_Description <- cut(as.numeric(new_df$Year), breaks = c(-Inf, 2000, Inf), labels = c("Before 2000", "2000 and later"), include.lowest = T)
 
                                
 #Must create at least one new continuous/numerical variable

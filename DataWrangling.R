@@ -1,3 +1,6 @@
+#Victoria Martinez
+#Luke Takechi
+
 library(dplyr)
 library(stringr)
 

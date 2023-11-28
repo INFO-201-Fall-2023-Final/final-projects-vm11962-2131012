@@ -12,7 +12,7 @@ annapurna_df$Year <- substr(annapurna_df$Date, nchar(annapurna_df$Date) -3, ncha
 new_df <- merge(annapurna_df, accidents_df, 
                 by.x = "Year", by.y = "Publication.Year", all = T)
 
-df_unique <- new_df[!duplicated(new_df[c("Accident.Title")]), ]
+new_df <- new_df[!duplicated(new_df[c("Accident.Title")]), ]
 
   
 #You will then also need to create additional columns in your dataset: 

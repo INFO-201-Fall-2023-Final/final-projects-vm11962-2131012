@@ -14,10 +14,15 @@ mount_e_df$Year <- substr(mount_e_df$Date, nchar(mount_e_df$Date) -4, nchar(moun
 new_df <- merge(annapurna_df, mount_e_df, 
                 by.x = "Date", by.y = "Date", all = T)
 
-new_df$Name <- paste(new_df$Name.x, new_df$Name.y, sep = " ")
-new_df <- new_df[, -which(names(new_df) == "Name.x", "Name.y")]
+col_to_con <- c("Name", "Year", "Nationality", "Cause.of.death")
 
-#new_df <- new_df[!duplicated(new_df[c("Accident.Title")]), ]
+for (col in col_to_con) {
+  new_df[[col]] <- paste(new_df[[paste0(col, ".x")]], new_df[[paste0(col, ".y")]], sep = " ")
+}
+
+
+col_to_rem <- c("Date", "Name.x", "Name.y", "Year.x", "Year.y", "Nationality.x", "Nationality.y", "Cause.of.death.x", "Cause.of.death.y")
+new_df <- new_df[, -which(names(new_df) %in% col_to_rem)]
 
   
 #You will then also need to create additional columns in your dataset: 

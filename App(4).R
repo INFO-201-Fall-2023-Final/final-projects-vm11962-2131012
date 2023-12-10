@@ -13,17 +13,20 @@ ui <- fluidPage(
   titlePanel("Outdoor Sport Incidents"),
   tags$head(
     tags$style(HTML("
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
               body { 
+              font-family: 'Libre Baskerville', sans-serif;
               background-color: #474747;
               color: white;
               }
+              
+              h2, h3, h4,{
               color: white;
               } 
               
-              ;")
-    )
-  ),  
-   
+              ;"))),  
+  
+  
   titlePanel(" "),
     tabsetPanel(
     tabPanel("Introduction", 
@@ -60,7 +63,7 @@ ui <- fluidPage(
     tabPanel("Accident Patterns", 
              h3("Top Causes of Death per Year"),
              
-             sliderInput("Year", "Pick a Year", min = 1977, max = 2021, value = 1977, sep = ""),
+             sliderInput("Year", "Pick a Year", min = 1977, max = 2021, value = 1970, sep = ""),
              plotOutput("plot")
     ),
     tabPanel("Tab 3", 
@@ -86,15 +89,14 @@ server <- function(input, output) {
                          "What was the most common injury overall?",
                          "Geographically, were there any hotspots for injuries or deaths?"))
   })
+  
   output$plot <- renderPlot({
     selected_year <- input$Year
     filtered_data <- subset(new_df, Year == selected_year)
     
-    
-    
     data_order <- filtered_data[order(-filtered_data$Num_Deaths_In_Yr), ]
-    
     same_rows <- data_order[!duplicated(data_order$Cause.of.death), ]
+       
     top_deaths <- head(same_rows, 5)
     top_deaths <- top_deaths[!(top_deaths$Cause.of.death == " " | is.na(top_deaths$Cause.of.death)), ]
     

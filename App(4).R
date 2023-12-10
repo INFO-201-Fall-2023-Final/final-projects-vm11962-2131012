@@ -1,13 +1,13 @@
+#Victoria Martinez
+#
+
 library(dplyr)
 library(stringr)
 library(ggplot2)
 library(shiny)
 library(plotly)
 
-#source("DataWrangling.R")
-
-#new_df <- read.csv("Climbing_deaths_cleaned.csv")
-
+source("DataWrangling.R")
 
 ui <- fluidPage(
   titlePanel("Outdoor Sport Incidents"),
@@ -26,15 +26,17 @@ ui <- fluidPage(
               
               ;"))),  
   
-  
   titlePanel(" "),
     tabsetPanel(
     tabPanel("Introduction", 
              h3("Introduction to Climbing and Outdoor Accidents"),
              br(),
              
-             img(src = "https://media.npr.org/assets/img/2015/03/18/afghan_climbers_024_slide-e7448d41cc8c680261ffecfdb738db38c12ad15a.jpg",
-                 width = "400px", style = "float: right;"),
+             tags$div(
+               img(src = "https://media.npr.org/assets/img/2015/03/18/afghan_climbers_024_slide-e7448d41cc8c680261ffecfdb738db38c12ad15a.jpg",
+                   width = "400px", style = "float: right; margin: 10px; border: 19px solid white;"),
+               style = "background-color: white; border-radius: 100px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);"
+             ),
              
              h4("Importance"),
              
@@ -60,10 +62,10 @@ ui <- fluidPage(
              h4("Spotlight"),
              htmlOutput("bullet_list"),
     ),
-    tabPanel("Accident Patterns", 
+    tabPanel("Accident Patterns",              
              h3("Top Causes of Death per Year"),
              
-             sliderInput("Year", "Pick a Year", min = 1977, max = 2021, value = 1970, sep = ""),
+             sliderInput("Year", "Pick a Year", min = 1978, max = 2021, value = 1978, sep = ""),
              plotOutput("plot")
     ),
     tabPanel("Tab 3", 
@@ -83,6 +85,7 @@ server <- function(input, output) {
     
     return(web_list)
   }  
+  
   output$bullet_list <- renderText({
       spot_list(c("What were the causes for most accidents or causes of death?", 
                          "Did the accidents have any common factors within these individuals?",
@@ -112,6 +115,6 @@ server <- function(input, output) {
     )
   })
 }
-
 shinyApp(ui = ui, server = server)
+
 

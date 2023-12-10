@@ -16,17 +16,14 @@ ui <- fluidPage(
               body { 
               background-color: #474747;
               color: white;
-              font-family: 'Spectral', sans-serif;
               }
-              
-              h2, h3, h4,{
-              font-family: 'Spectral', sans-serif;
               color: white;
               } 
               
-              ;"))),  
-  
-  
+              ;")
+    )
+  ),  
+   
   titlePanel(" "),
     tabsetPanel(
     tabPanel("Introduction", 
@@ -63,7 +60,7 @@ ui <- fluidPage(
     tabPanel("Accident Patterns", 
              h3("Top Causes of Death per Year"),
              
-             sliderInput("Year", "Pick a Year", min = 1922, max = 2021, value = 1970, sep = ""),
+             sliderInput("Year", "Pick a Year", min = 1977, max = 2021, value = 1977, sep = ""),
              plotOutput("plot")
     ),
     tabPanel("Tab 3", 

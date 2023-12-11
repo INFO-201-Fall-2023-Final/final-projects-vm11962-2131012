@@ -155,8 +155,8 @@ server <- function(input, output) {
       col = "skyblue",
       border = "black",
       ylim = c(0, max(top_deaths$Num_Deaths_In_Yr) + 10),
-      cex.names = 0.8, # Adjust the size of axis labels
-      las = 2, # Rotate axis labels for better visibility
+      cex.names = 0.8, 
+      las = 2, 
       legend.text = top_deaths$Cause.of.death,
       args.legend = list(title = "Cause of Death", x = "topright", bty = "n")
     )

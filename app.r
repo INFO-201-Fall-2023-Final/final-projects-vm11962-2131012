@@ -7,7 +7,6 @@ library(ggplot2)
 library(shiny)
 library(plotly)
 
-# Read datasets
 annapurna_df <- read.csv("annapurna.csv") 
 mount_e_df <- read.csv("mount_everest_deaths.csv")
 
@@ -165,7 +164,6 @@ server <- function(input, output) {
   output$compare_plot <- renderPlot({
     selected_year1 <- input$year1
     selected_year2 <- input$year2
-    # Exclude the "75" entries explicitly
     filtered_data <- subset(new_df, grepl("^\\d{4}$", Year) & Year %in% c(selected_year1, selected_year2) & Year != "75")
     ggplot(filtered_data, aes(x = Num_Deaths_In_Yr, y = Cause.of.death, fill = factor(Year))) +
       geom_bar(stat = "identity", position = "dodge") +
